@@ -1,0 +1,1031 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brasa e Forno | Pizzaria</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fff8ef;
+            color: #333;
+        }
+
+        header {
+            background: #681b13;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            color: #ffca65;
+            font-size: 27px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffca65;
+        }
+
+        .banner {
+            min-height: 350px;
+            background:
+                linear-gradient(#0008, #0008),
+                url("https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1600")
+                center/cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .banner h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .banner p {
+            font-size: 19px;
+            margin-bottom: 25px;
+        }
+
+        .botao {
+            background: #d83a22;
+            color: white;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .botao:hover {
+            background: #a92716;
+        }
+
+        section {
+            padding: 55px 7%;
+            scroll-margin-top: 85px;
+        }
+
+        .titulo {
+            text-align: center;
+            color: #681b13;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* CADASTRO */
+
+        .cadastro-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #0002;
+        }
+
+        label {
+            display: block;
+            margin: 14px 0 7px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        /* PRODUTOS */
+
+        .categoria {
+            margin: 35px 0 20px;
+            color: #681b13;
+            font-size: 24px;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .produto {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px #0002;
+            padding-bottom: 20px;
+        }
+
+        .produto img {
+            width: 100%;
+            height: 175px;
+            object-fit: cover;
+        }
+
+        .produto h3 {
+            color: #681b13;
+            padding: 14px 15px 5px;
+        }
+
+        .produto p {
+            padding: 5px 15px;
+            color: #666;
+            min-height: 40px;
+        }
+
+        .produto .preco {
+            color: #16813a;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .produto .conteudo {
+            padding: 0 15px;
+        }
+
+        .produto button {
+            margin-top: 12px;
+            width: 100%;
+        }
+
+        /* CARRINHO */
+
+        .painel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #0002;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px;
+        }
+
+        th, td {
+            padding: 13px 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #681b13;
+            color: white;
+        }
+
+        .quantidade button {
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background: #eee;
+        }
+
+        .totais {
+            max-width: 350px;
+            margin: 20px 0 0 auto;
+            line-height: 2;
+        }
+
+        .total-final {
+            font-size: 23px;
+            color: #16813a;
+            font-weight: bold;
+            border-top: 2px solid #ddd;
+            padding-top: 8px;
+        }
+
+        /* PAGAMENTO */
+
+        .pagamento {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #0002;
+        }
+
+        /* RESUMO */
+
+        .resumo {
+            background: white;
+            max-width: 700px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #0002;
+        }
+
+        .resumo-linha {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* LINHA DO TEMPO */
+
+        .linha-tempo {
+            max-width: 750px;
+            margin: auto;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .linha-tempo::before {
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: 10px;
+            bottom: 10px;
+            width: 4px;
+            background: #ddd;
+        }
+
+        .etapa {
+            position: relative;
+            padding: 0 0 35px 25px;
+            color: #888;
+        }
+
+        .etapa::before {
+            content: "";
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ccc;
+            border: 3px solid #fff8ef;
+        }
+
+        .etapa.ativa {
+            color: #16813a;
+            font-weight: bold;
+        }
+
+        .etapa.ativa::before {
+            background: #16813a;
+        }
+
+        .etapa h3 {
+            margin-bottom: 5px;
+        }
+
+        footer {
+            background: #681b13;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                justify-content: center;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .banner h2 {
+                font-size: 30px;
+            }
+
+            section {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <h1>🍕 Brasa e Forno</h1>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#cadastro">Cadastro</a>
+            <a href="#cardapio">Cardápio</a>
+            <a href="#carrinho">Carrinho (<span id="contador">0</span>)</a>
+            <a href="#pagamento">Pagamento</a>
+            <a href="#linha-tempo">Acompanhar pedido</a>
+        </nav>
+    </header>
+
+    <!-- INÍCIO -->
+    <div class="banner" id="inicio">
+        <h2>Brasa e Forno</h2>
+        <p>O verdadeiro sabor da pizza feita com carinho!</p>
+        <a href="#cardapio" class="botao">Ver nosso cardápio</a>
+    </div>
+
+    <!-- CADASTRO -->
+    <section id="cadastro">
+        <h2 class="titulo">Cadastro de Cliente</h2>
+
+        <div class="cadastro-container">
+            <form id="formCadastro">
+                <label for="nome">Nome completo:</label>
+                <input type="text" id="nome" required placeholder="Digite seu nome">
+
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" required placeholder="Rua, número e bairro">
+
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" required
+                       placeholder="(00) 00000-0000">
+
+                <br><br>
+                <button class="botao" type="submit">Cadastrar cliente</button>
+            </form>
+
+            <p id="mensagemCadastro" style="margin-top:15px;color:green;"></p>
+        </div>
+    </section>
+
+    <!-- CARDÁPIO -->
+    <section id="cardapio">
+        <h2 class="titulo">Nosso Cardápio</h2>
+
+        <h3 class="categoria">🍕 Pizzas</h3>
+
+        <div class="produtos">
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?w=700" alt="Pizza de calabresa">
+                <div class="conteudo">
+                    <h3>Pizza de Calabresa</h3>
+                    <p>Calabresa, cebola, mussarela e molho especial.</p>
+                    <label>Tamanho:</label>
+                    <select class="tamanho">
+                        <option value="35">Pequena - R$ 35,00</option>
+                        <option value="45">Média - R$ 45,00</option>
+                        <option value="55">Grande - R$ 55,00</option>
+                    </select>
+                    <button class="botao" onclick="adicionarPizza(this)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=700" alt="Pizza de mussarela">
+                <div class="conteudo">
+                    <h3>Pizza de Mussarela</h3>
+                    <p>Mussarela, tomate, orégano e molho de tomate.</p>
+                    <label>Tamanho:</label>
+                    <select class="tamanho">
+                        <option value="32">Pequena - R$ 32,00</option>
+                        <option value="42">Média - R$ 42,00</option>
+                        <option value="52">Grande - R$ 52,00</option>
+                    </select>
+                    <button class="botao" onclick="adicionarPizza(this)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=700" alt="Pizza quatro queijos">
+                <div class="conteudo">
+                    <h3>Quatro Queijos</h3>
+                    <p>Mussarela, parmesão, provolone e catupiry.</p>
+                    <label>Tamanho:</label>
+                    <select class="tamanho">
+                        <option value="40">Pequena - R$ 40,00</option>
+                        <option value="50">Média - R$ 50,00</option>
+                        <option value="60">Grande - R$ 60,00</option>
+                    </select>
+                    <button class="botao" onclick="adicionarPizza(this)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700" alt="Pizza de frango">
+                <div class="conteudo">
+                    <h3>Frango com Catupiry</h3>
+                    <p>Frango desfiado, catupiry e mussarela.</p>
+                    <label>Tamanho:</label>
+                    <select class="tamanho">
+                        <option value="38">Pequena - R$ 38,00</option>
+                        <option value="48">Média - R$ 48,00</option>
+                        <option value="58">Grande - R$ 58,00</option>
+                    </select>
+                    <button class="botao" onclick="adicionarPizza(this)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=700" alt="Pizza portuguesa">
+                <div class="conteudo">
+                    <h3>Pizza Portuguesa</h3>
+                    <p>Presunto, ovos, cebola, ervilha e mussarela.</p>
+                    <label>Tamanho:</label>
+                    <select class="tamanho">
+                        <option value="38">Pequena - R$ 38,00</option>
+                        <option value="48">Média - R$ 48,00</option>
+                        <option value="58">Grande - R$ 58,00</option>
+                    </select>
+                    <button class="botao" onclick="adicionarPizza(this)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=700" alt="Pizza de chocolate">
+                <div class="conteudo">
+                    <h3>Pizza de Chocolate</h3>
+                    <p>Chocolate cremoso e cobertura especial.</p>
+                    <label>Tamanho:</label>
+                    <select class="tamanho">
+                        <option value="38">Pequena - R$ 38,00</option>
+                        <option value="48">Média - R$ 48,00</option>
+                        <option value="58">Grande - R$ 58,00</option>
+                    </select>
+                    <button class="botao" onclick="adicionarPizza(this)">Adicionar</button>
+                </div>
+            </article>
+
+        </div>
+
+        <h3 class="categoria">🥤 Refrigerantes</h3>
+
+        <div class="produtos">
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=700" alt="Refrigerante Coca-Cola">
+                <div class="conteudo">
+                    <h3>Refrigerante Cola 2L</h3>
+                    <p>Garrafa de refrigerante de 2 litros.</p>
+                    <p class="preco">R$ 12,00</p>
+                    <button class="botao" onclick="adicionarBebida('Refrigerante Cola 2L', 12)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=700" alt="Refrigerante de guaraná">
+                <div class="conteudo">
+                    <h3>Guaraná 2L</h3>
+                    <p>Garrafa de refrigerante de guaraná de 2 litros.</p>
+                    <p class="preco">R$ 10,00</p>
+                    <button class="botao" onclick="adicionarBebida('Guaraná 2L', 10)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1554866585-cd94860890b7?w=700" alt="Refrigerante lata">
+                <div class="conteudo">
+                    <h3>Refrigerante Lata</h3>
+                    <p>Lata de refrigerante 350 ml.</p>
+                    <p class="preco">R$ 6,00</p>
+                    <button class="botao" onclick="adicionarBebida('Refrigerante Lata', 6)">Adicionar</button>
+                </div>
+            </article>
+
+        </div>
+
+        <h3 class="categoria">🧃 Sucos</h3>
+
+        <div class="produtos">
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=700" alt="Suco de laranja">
+                <div class="conteudo">
+                    <h3>Suco de Laranja</h3>
+                    <p>Suco de laranja natural 500 ml.</p>
+                    <p class="preco">R$ 8,00</p>
+                    <button class="botao" onclick="adicionarBebida('Suco de Laranja 500ml', 8)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1546173159-315724a31696?w=700" alt="Suco de morango">
+                <div class="conteudo">
+                    <h3>Suco de Morango</h3>
+                    <p>Suco de morango 500 ml.</p>
+                    <p class="preco">R$ 9,00</p>
+                    <button class="botao" onclick="adicionarBebida('Suco de Morango 500ml', 9)">Adicionar</button>
+                </div>
+            </article>
+
+            <article class="produto">
+                <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=700" alt="Suco de abacaxi">
+                <div class="conteudo">
+                    <h3>Suco de Abacaxi</h3>
+                    <p>Suco de abacaxi 500 ml.</p>
+                    <p class="preco">R$ 8,00</p>
+                    <button class="botao" onclick="adicionarBebida('Suco de Abacaxi 500ml', 8)">Adicionar</button>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- CARRINHO -->
+    <section id="carrinho">
+        <h2 class="titulo">🛒 Meu Carrinho</h2>
+
+        <div class="painel">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Tamanho</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Subtotal</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaCarrinho">
+                    <tr>
+                        <td colspan="6">Seu carrinho está vazio.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="totais">
+                <p>Subtotal: <span id="subtotal">R$ 0,00</span></p>
+                <p>Taxa de entrega: <span id="taxa">R$ 0,00</span></p>
+                <p class="total-final">Total: <span id="total">R$ 0,00</span></p>
+
+                <button class="botao" onclick="limparCarrinho()">Limpar carrinho</button>
+                <a href="#pagamento" class="botao">Finalizar pedido</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGAMENTO -->
+    <section id="pagamento">
+        <h2 class="titulo">💳 Forma de Pagamento</h2>
+
+        <div class="pagamento">
+            <form id="formPagamento">
+
+                <label for="formaPagamento">Escolha a forma de pagamento:</label>
+                <select id="formaPagamento" required>
+                    <option value="">Selecione</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Cartão de crédito">Cartão de crédito</option>
+                    <option value="Cartão de débito">Cartão de débito</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
+
+                <div id="campoTroco" style="display:none;">
+                    <label for="troco">Precisa de troco para quanto?</label>
+                    <input type="number" id="troco" min="0" step="0.01"
+                           placeholder="Ex.: 100,00">
+                </div>
+
+                <br><br>
+                <button type="submit" class="botao">Confirmar pedido</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- RESUMO DO PEDIDO -->
+    <section id="resumo">
+        <h2 class="titulo">📋 Resumo do Pedido</h2>
+
+        <div class="resumo">
+            <h3>Dados do cliente</h3>
+            <div id="dadosResumo">
+                <p>Preencha o cadastro para visualizar os dados.</p>
+            </div>
+
+            <br>
+            <h3>Produtos pedidos</h3>
+            <div id="itensResumo">
+                <p>Nenhum produto selecionado.</p>
+            </div>
+
+            <br>
+            <div class="resumo-linha">
+                <strong>Subtotal:</strong>
+                <span id="resumoSubtotal">R$ 0,00</span>
+            </div>
+
+            <div class="resumo-linha">
+                <strong>Entrega:</strong>
+                <span id="resumoTaxa">R$ 0,00</span>
+            </div>
+
+            <div class="resumo-linha total-final">
+                <strong>Total:</strong>
+                <span id="resumoTotal">R$ 0,00</span>
+            </div>
+
+            <div class="resumo-linha">
+                <strong>Pagamento:</strong>
+                <span id="resumoPagamento">Não confirmado</span>
+            </div>
+
+            <p id="statusPedido" style="color:green;font-weight:bold;margin-top:20px;"></p>
+        </div>
+    </section>
+
+    <!-- LINHA DO TEMPO -->
+    <section id="linha-tempo">
+        <h2 class="titulo">🕒 Acompanhe seu Pedido</h2>
+
+        <div class="linha-tempo">
+
+            <div class="etapa ativa" id="etapa1">
+                <h3>1. Pedido realizado</h3>
+                <p>Seu pedido foi recebido pela pizzaria.</p>
+            </div>
+
+            <div class="etapa" id="etapa2">
+                <h3>2. Pedido confirmado</h3>
+                <p>Estamos conferindo os detalhes do pedido.</p>
+            </div>
+
+            <div class="etapa" id="etapa3">
+                <h3>3. Em preparação</h3>
+                <p>Nossa equipe está preparando sua pizza.</p>
+            </div>
+
+            <div class="etapa" id="etapa4">
+                <h3>4. Saiu para entrega</h3>
+                <p>Seu pedido está a caminho.</p>
+            </div>
+
+            <div class="etapa" id="etapa5">
+                <h3>5. Pedido entregue</h3>
+                <p>Bom apetite! Obrigado por comprar conosco.</p>
+            </div>
+
+        </div>
+
+        <div style="text-align:center;">
+            <button class="botao" onclick="avancarEtapa()">
+                Avançar etapa (demonstração)
+            </button>
+            <p style="margin-top:12px;color:#777;">
+                A linha do tempo é demonstrativa. Em um sistema real,
+                as etapas seriam atualizadas pela equipe da pizzaria.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <h3>🍕 Brasa e Forno</h3>
+        <p>O sabor que reúne todo mundo!</p>
+        <p>© 2026 - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // DADOS DO SITE
+        let carrinho = [];
+        let cliente = {};
+        let etapaAtual = 1;
+        const taxaEntrega = 5;
+
+        function dinheiro(valor) {
+            return valor.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+        }
+
+        // CADASTRO DO CLIENTE
+        document.getElementById("formCadastro").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            cliente = {
+                nome: document.getElementById("nome").value,
+                endereco: document.getElementById("endereco").value,
+                telefone: document.getElementById("telefone").value
+            };
+
+            document.getElementById("mensagemCadastro").textContent =
+                "Cadastro realizado com sucesso!";
+
+            atualizarResumo();
+        });
+
+        // ADICIONAR PIZZA
+        function adicionarPizza(botao) {
+            const produto = botao.closest(".produto");
+            const nome = produto.querySelector("h3").textContent;
+            const select = produto.querySelector(".tamanho");
+            const preco = Number(select.value);
+            const tamanho = select.options[select.selectedIndex].text.split(" - ")[0];
+
+            adicionarAoCarrinho(nome, tamanho, preco);
+        }
+
+        // ADICIONAR BEBIDA
+        function adicionarBebida(nome, preco) {
+            adicionarAoCarrinho(nome, "Único", preco);
+        }
+
+        // FUNÇÃO GERAL DO CARRINHO
+        function adicionarAoCarrinho(nome, tamanho, preco) {
+            const existente = carrinho.find(item =>
+                item.nome === nome && item.tamanho === tamanho
+            );
+
+            if (existente) {
+                existente.quantidade++;
+            } else {
+                carrinho.push({
+                    nome: nome,
+                    tamanho: tamanho,
+                    preco: preco,
+                    quantidade: 1
+                });
+            }
+
+            atualizarCarrinho();
+        }
+
+        // ATUALIZAR CARRINHO
+        function atualizarCarrinho() {
+            const lista = document.getElementById("listaCarrinho");
+            lista.innerHTML = "";
+
+            if (carrinho.length === 0) {
+                lista.innerHTML =
+                    '<tr><td colspan="6">Seu carrinho está vazio.</td></tr>';
+            }
+
+            carrinho.forEach((item, index) => {
+                const linha = document.createElement("tr");
+
+                const dados = [
+                    item.nome,
+                    item.tamanho,
+                    dinheiro(item.preco),
+                    item.quantidade,
+                    dinheiro(item.preco * item.quantidade)
+                ];
+
+                dados.forEach(valor => {
+                    const celula = document.createElement("td");
+                    celula.textContent = valor;
+                    linha.appendChild(celula);
+                });
+
+                const acao = document.createElement("td");
+
+                const diminuir = document.createElement("button");
+                diminuir.textContent = "−";
+                diminuir.type = "button";
+                diminuir.onclick = () => alterarQuantidade(index, -1);
+
+                const aumentar = document.createElement("button");
+                aumentar.textContent = "+";
+                aumentar.type = "button";
+                aumentar.onclick = () => alterarQuantidade(index, 1);
+
+                const remover = document.createElement("button");
+                remover.textContent = "Remover";
+                remover.type = "button";
+                remover.style.marginLeft = "5px";
+                remover.onclick = () => removerItem(index);
+
+                acao.append(diminuir, aumentar, remover);
+                linha.appendChild(acao);
+                lista.appendChild(linha);
+            });
+
+            atualizarValores();
+            atualizarResumo();
+
+            const quantidadeTotal = carrinho.reduce(
+                (soma, item) => soma + item.quantidade, 0
+            );
+
+            document.getElementById("contador").textContent = quantidadeTotal;
+        }
+
+        function alterarQuantidade(index, valor) {
+            carrinho[index].quantidade += valor;
+
+            if (carrinho[index].quantidade <= 0) {
+                carrinho.splice(index, 1);
+            }
+
+            atualizarCarrinho();
+        }
+
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            atualizarCarrinho();
+        }
+
+        function limparCarrinho() {
+            carrinho = [];
+            atualizarCarrinho();
+        }
+
+        // CALCULAR VALORES
+        function calcularSubtotal() {
+            return carrinho.reduce(
+                (soma, item) => soma + item.preco * item.quantidade, 0
+            );
+        }
+
+        function atualizarValores() {
+            const subtotal = calcularSubtotal();
+            const taxa = carrinho.length > 0 ? taxaEntrega : 0;
+            const total = subtotal + taxa;
+
+            document.getElementById("subtotal").textContent = dinheiro(subtotal);
+            document.getElementById("taxa").textContent = dinheiro(taxa);
+            document.getElementById("total").textContent = dinheiro(total);
+        }
+
+        // RESUMO DO PEDIDO
+        function atualizarResumo() {
+            const dados = document.getElementById("dadosResumo");
+            const itens = document.getElementById("itensResumo");
+
+            if (cliente.nome) {
+                dados.innerHTML = "";
+
+                [ 
+                    ["Nome", cliente.nome],
+                    ["Endereço", cliente.endereco],
+                    ["Telefone", cliente.telefone]
+                ].forEach(([rotulo, valor]) => {
+                    const p = document.createElement("p");
+                    p.textContent = rotulo + ": " + valor;
+                    dados.appendChild(p);
+                });
+            }
+
+            itens.innerHTML = "";
+
+            if (carrinho.length === 0) {
+                itens.textContent = "Nenhum produto selecionado.";
+            } else {
+                carrinho.forEach(item => {
+                    const p = document.createElement("p");
+                    p.textContent =
+                        item.quantidade + "x " + item.nome +
+                        " (" + item.tamanho + ") - " +
+                        dinheiro(item.preco * item.quantidade);
+
+                    itens.appendChild(p);
+                });
+            }
+
+            const subtotal = calcularSubtotal();
+            const taxa = carrinho.length > 0 ? taxaEntrega : 0;
+
+            document.getElementById("resumoSubtotal").textContent = dinheiro(subtotal);
+            document.getElementById("resumoTaxa").textContent = dinheiro(taxa);
+            document.getElementById("resumoTotal").textContent = dinheiro(subtotal + taxa);
+        }
+
+        // CAMPO DE TROCO
+        document.getElementById("formaPagamento").addEventListener("change", function() {
+            document.getElementById("campoTroco").style.display =
+                this.value === "Dinheiro" ? "block" : "none";
+        });
+
+        // CONFIRMAR PAGAMENTO E PEDIDO
+        document.getElementById("formPagamento").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (!cliente.nome) {
+                alert("Por favor, faça seu cadastro antes de finalizar o pedido.");
+                location.href = "#cadastro";
+                return;
+            }
+
+            if (carrinho.length === 0) {
+                alert("Adicione pelo menos um produto ao carrinho.");
+                location.href = "#cardapio";
+                return;
+            }
+
+            const pagamento = document.getElementById("formaPagamento").value;
+
+            if (pagamento === "Dinheiro") {
+                const troco = Number(document.getElementById("troco").value);
+                const total = calcularSubtotal() + taxaEntrega;
+
+                if (document.getElementById("troco").value && troco < total) {
+                    alert("O valor informado para o troco precisa ser maior ou igual ao total.");
+                    return;
+                }
+            }
+
+            document.getElementById("resumoPagamento").textContent = pagamento;
+            document.getElementById("statusPedido").textContent =
+                "Pedido confirmado com sucesso! Obrigado por escolher a Brasa e Forno.";
+
+            etapaAtual = 2;
+            atualizarLinhaDoTempo();
+
+            alert("Pedido confirmado! Confira o resumo do seu pedido.");
+
+            location.href = "#resumo";
+        });
+
+        // LINHA DO TEMPO
+        function atualizarLinhaDoTempo() {
+            for (let i = 1; i <= 5; i++) {
+                const etapa = document.getElementById("etapa" + i);
+                etapa.classList.toggle("ativa", i <= etapaAtual);
+            }
+        }
+
+        function avancarEtapa() {
+            if (etapaAtual < 2) {
+                alert("Confirme um pedido antes de avançar as etapas.");
+                return;
+            }
+
+            if (etapaAtual < 5) {
+                etapaAtual++;
+                atualizarLinhaDoTempo();
+            } else {
+                alert("O pedido já foi entregue!");
+            }
+        }
+
+        // ESTADO INICIAL
+        atualizarCarrinho();
+    </script>
+
+<footer>
+    <h3>🍕 Brasa e Forno</h3>
+    <p>O sabor que reúne todo mundo!</p>
+
+    <div style="margin: 18px 0; line-height: 2.2;">
+        <p>
+            📱 WhatsApp:
+            <a href="https://wa.me/5561999999999"
+               target="_blank"
+               style="color:#ffca65;">
+                (61) 99999-9999
+            </a>
+        </p>
+
+        <p>
+            📸 Instagram:
+            <a href="https://www.instagram.com/seuinstagram/"
+               target="_blank"
+               style="color:#ffca65;">
+                @brasaeforno
+            </a>
+        </p>
+    </div>
+
+    <p>© 2026 - Todos os direitos reservados.</p>
+</footer>
+
+
+</body>
+</html>
